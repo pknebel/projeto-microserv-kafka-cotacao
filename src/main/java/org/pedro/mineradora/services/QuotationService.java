@@ -48,14 +48,14 @@ public class QuotationService {
     private boolean updateCurrentInfoPrice(CurrencyPriceDTO currencyPriceInfo) {
 
         BigDecimal currentPrice = new BigDecimal(currencyPriceInfo.getUsdbrl().getBid());
-        AtomicBoolean updatePrice = new AtomicBoolean(false);
+        boolean updatePrice = false;
 
         List<QuotationEntity> quotationList = quotationRepository.findAll().list();
 
         if(quotationList.isEmpty()){
 
-            saveQuotation(currencyInfo);
-            updatePrice.set(true);
+            saveQuotation(currencyPriceInfo);
+            updatePrice = true;
 
         } else {
 
@@ -63,13 +63,13 @@ public class QuotationService {
 
             if(currentPrice.floatValue() > lastDollarPrice.getCurrencyPrice().floatValue()){
 
-                updatePrice.set(true);
-                saveQuotation(currencyInfo);
+                updatePrice = true;
+                saveQuotation(currencyPriceInfo);
 
             }
         }
 
-        return updatePrice.get();
+        return updatePrice;
 
     }
 
