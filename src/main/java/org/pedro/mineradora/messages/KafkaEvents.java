@@ -17,7 +17,7 @@ public class KafkaEvents {
 
     public void sendNewKafkaEvent(QuotationDTO quotation) {
 
-        LOG.info("Sending quotation to Kafka topic: {}", quotation);
+        LOG.info("Sending quotation to Kafka topic");
         quotationRequestEmitter.send(quotation).toCompletableFuture().join();
 
     }

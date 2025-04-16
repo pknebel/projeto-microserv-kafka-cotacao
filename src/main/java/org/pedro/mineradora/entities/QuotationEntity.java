@@ -15,7 +15,7 @@ public class QuotationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private Date date;
 
